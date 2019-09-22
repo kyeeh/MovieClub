@@ -12,13 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :imdb_id %>
-    <%= form.number_field :imdb_id %>
+    <%= form.label :img_url %>
+    <%= form.url_field :img_url %>
   </div>
 
   <div class="field">
-    <%= form.label :data %>
-    <%= form.text_area :data %>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :release_date %>
+    <%= form.date_field :release_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :genre %>
+    <%= form.text_field :genre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.text_field :duration %>
   </div>
 
   <div class="actions">

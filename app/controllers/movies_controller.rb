@@ -1,6 +1,12 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
+  # GET /search_list
+  # GET /search_list.json
+  def search_list(key_word)
+    @movies = Movie.search(key_word)
+  end
+
   # GET /movies
   # GET /movies.json
   def index
@@ -69,6 +75,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:imdb_id, :data)
+      params.require(:movie).permit(:img_url, :title, :release_date, :genre, :duration)
     end
 end

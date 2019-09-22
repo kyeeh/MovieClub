@@ -10,13 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_22_174915) do
+ActiveRecord::Schema.define(version: 2019_09_22_222834) do
 
   create_table "movies", force: :cascade do |t|
     t.integer "imdb_id"
     t.text "data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "img_url"
+    t.string "title"
+    t.date "release_date"
+    t.string "genre"
+    t.string "duration"
   end
 
 end
