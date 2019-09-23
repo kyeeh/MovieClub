@@ -22,5 +22,5 @@ Things you may want to cover:
   Search engine made with http://www.omdbapi.com/ using the API for movie database.
 
 * Deployment instructions
-
+  $rails s
 * ...
