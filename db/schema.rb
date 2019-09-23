@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_22_222834) do
+ActiveRecord::Schema.define(version: 2019_09_23_043548) do
 
   create_table "movies", force: :cascade do |t|
     t.string "imdb_id"
@@ -22,6 +22,25 @@ ActiveRecord::Schema.define(version: 2019_09_22_222834) do
     t.date "release_date"
     t.string "genre"
     t.string "duration"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "users_movies", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "movies_id"
+    t.index ["movies_id"], name: "index_users_movies_on_movies_id"
+    t.index ["user_id"], name: "index_users_movies_on_user_id"
   end
 
 end

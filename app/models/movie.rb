@@ -1,5 +1,7 @@
 class Movie < ApplicationRecord
   extend Movies::Api
+  has_and_belongs_to_many :Users
+
 
   class << self
     def search(key_word)
