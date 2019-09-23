@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2019_09_22_222834) do
 
   create_table "movies", force: :cascade do |t|
-    t.integer "imdb_id"
+    t.string "imdb_id"
     t.text "data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -25,7 +25,7 @@
         <td><img src=<%= "#{movie.img_url}" %>></td>
         <td><%= movie.title %></td>
         <td><%= movie.release_date %></td>
-        <td><%= link_to 'Show', movie %></td>
+        <td><%= link_to "Add", add_movie_path(movie.imdb_id) %></td>
       </tr>
     <% end %>
   </tbody>
