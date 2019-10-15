@@ -2,8 +2,6 @@ module Movies
   module Api
     extend ActiveSupport::Concern
 
-    #url = https://api.themoviedb.org/3/movie/552/recommendations?api_key=db9daceaaf741afe6a09c94d9c27cace
-
     def multi_search(key_word)
       unless ENV["TMDB_API_KEY"]
         raise ArgumentError, "FATAL ERROR, NO API KEY PROVIDED"

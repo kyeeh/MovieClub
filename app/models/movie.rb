@@ -8,7 +8,6 @@ class Movie < ApplicationRecord
       movies = []
       unless key_word.empty?
         api_movies = Movie.multi_search(key_word)["results"]
-        puts api_movies.inspect
         api_movies.each do |movie_json|
           if movie_json["title"] && movie_json["popularity"] >= 5
             movie = Movie.new
@@ -19,6 +18,7 @@ class Movie < ApplicationRecord
             else
               movie.img_url = "https://nerdbot.com/wp-content/uploads/2018/12/not_available.png"
             end
+            movie.release_date = movie_json["release_date"]
             movies << movie
           end
         end

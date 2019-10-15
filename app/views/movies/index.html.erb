@@ -1,5 +1,8 @@
-<h1>Your Favorite Movies</h1>
+<h1>Your Movie Watchlist</h1>
 
+<% if @movies.empty? %>
+  <h3>There is no movies in your Watchlist, try to add some...</h3>
+<% else %>
 <table>
   <thead>
     <tr>
@@ -27,8 +30,7 @@
     <% end %>
   </tbody>
 </table>
-
+<% end %>
 <br>
 
-<%= link_to 'Create a Movie', new_movie_path %> or 
-<%= link_to 'Add a Movie by title search', search_movies_path %>
+<%= link_to 'Search Movies to Add', search_movies_path %>
