@@ -18,7 +18,7 @@
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
-        <td><%= movie.img_url %></td>
+        <td><img class="movie_poster" src=<%= "#{movie.img_url}" %>></td>
         <td><%= movie.title %></td>
         <td><%= movie.release_date %></td>
         <td><%= movie.genre %></td>
