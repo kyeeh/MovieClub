@@ -41,6 +41,7 @@ class Movie < ApplicationRecord
         end
         movie.release_date = movie_json["release_date"]
         movie.duration = movie_json["runtime"].to_s + "mins"
+        movie.overview = movie_json["overview"].to_s
         movie.data = movie_json
         return movie
       end
