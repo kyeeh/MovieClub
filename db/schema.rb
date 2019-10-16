@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 2019_09_23_043548) do
     t.string "duration"
   end
 
+  create_table "movies_users", id: false, force: :cascade do |t|
+    t.integer "movie_id"
+    t.integer "user_id"
+    t.index ["movie_id"], name: "index_movies_users_on_movie_id"
+    t.index ["user_id"], name: "index_movies_users_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -34,13 +41,6 @@ ActiveRecord::Schema.define(version: 2019_09_23_043548) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "users_movies", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "movies_id"
-    t.index ["movies_id"], name: "index_users_movies_on_movies_id"
-    t.index ["user_id"], name: "index_users_movies_on_user_id"
   end
 
 end

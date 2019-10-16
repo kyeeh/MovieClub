@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
   extend Movies::Api
-  has_and_belongs_to_many :Users
+  has_and_belongs_to_many :users
 
 
   class << self

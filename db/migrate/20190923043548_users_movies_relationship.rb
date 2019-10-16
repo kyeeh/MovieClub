@@ -1,8 +1,8 @@
 class UsersMoviesRelationship < ActiveRecord::Migration[6.0]
   def change
-    create_table :users_movies, id: false do |t|
+    create_table :movies_users, id: false do |t|
+      t.belongs_to :movie
       t.belongs_to :user
-      t.belongs_to :movies
     end    
   end
 end
