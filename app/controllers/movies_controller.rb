@@ -13,13 +13,19 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = Movie.all.order(:release_date)
   end
 
   # GET /movies/1
   # GET /movies/1.json
   def show
   end
+
+  # GET /movies/1/recommendations
+  def recommendations
+    #@movie = Movie.get(movie_id_param)
+    @movies = Movie.recommendation(movie_id_param)  
+  end  
 
   # GET /movies/new
   def new
@@ -34,7 +40,7 @@ class MoviesController < ApplicationController
   # POST /movies
   # POST /movies.json
   def add
-    @movie = Movie.get(id_movie_param)
+    @movie = Movie.get(movie_id_param)
 
     respond_to do |format|
       if @movie.save
@@ -100,7 +106,7 @@ class MoviesController < ApplicationController
       params.permit(:id)
     end
 
-    def id_movie_param
+    def movie_id_param
       params.permit(:id)
     end 
 end

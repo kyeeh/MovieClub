@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Search Movies</h1>
+<%= form_tag(search_movies_path, method: "get") do %>
+  <%= label_tag(:query, "Search movies by title:") %>
+  <%= text_field_tag :query %>
+  <%= submit_tag "Search", name: nil %>
+<% end %>
+
+<% unless @movies.empty? %>
+  <h2>Search Results</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Release Date</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><img class="movie_poster" src=<%= "#{movie.img_url}" %>></td>
+          <td><%= movie.title %></td>
+          <td><%= movie.release_date %></td>
+          <td><%= link_to "Add to Watchlist", add_movie_path(movie.imdb_id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<br>
+
+<%= link_to 'Back', movies_path %>
