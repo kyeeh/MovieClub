@@ -2,8 +2,10 @@ class Movie < ApplicationRecord
   extend Movies::Api
   has_and_belongs_to_many :users
 
-
+  # Class methods
   class << self
+
+    # Search movies with a keyword as param
     def search(key_word)
       movies = []
       unless key_word.empty?
@@ -16,14 +18,17 @@ class Movie < ApplicationRecord
       movies
     end
 
+    # Get a movie by API id
     def get(param)
       movie_json = Movie.search_by_id(param["id"])
       movie = set(movie_json)
-      return movie
+      movie.genre = genres(movie_json["genres"])
+      movie
     end
 
     private
 
+    # Movie instance mapper with JSON object
     def set(movie_json)
       if movie_json["title"] && movie_json["popularity"] >= 5
         movie = Movie.new
@@ -35,10 +40,24 @@ class Movie < ApplicationRecord
           movie.img_url = "https://nerdbot.com/wp-content/uploads/2018/12/not_available.png"
         end
         movie.release_date = movie_json["release_date"]
+        movie.duration = movie_json["runtime"].to_s + "mins"
         movie.data = movie_json
         return movie
       end
       return nil
     end
+
+    # Genres helper to parse JSON format from API
+    def genres(data)
+      genres_api = []
+      data.each do |genre|
+        genres_api << genre["name"]
+      end
+      genres_api.join(", ")
+    end    
   end
+
+  #Instance methods
+
+
 end
