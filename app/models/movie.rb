@@ -56,8 +56,4 @@ class Movie < ApplicationRecord
       genres_api.join(", ")
     end    
   end
-
-  #Instance methods
-
-
 end
