@@ -1,6 +1,8 @@
 class Movie < ApplicationRecord
   extend Movies::Api
-  has_and_belongs_to_many :users
+
+  has_many :watchlists
+  has_many :users, :through => :watchlists#, class_name: 'User'
 
   # Class methods
   class << self

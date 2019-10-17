@@ -41,6 +41,7 @@ class MoviesController < ApplicationController
   # POST /movies.json
   def add
     @movie = Movie.get(tmdb_id_param["id"])
+    @movie.users << current_user
 
     respond_to do |format|
       if @movie.save
