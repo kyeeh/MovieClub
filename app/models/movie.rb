@@ -20,17 +20,29 @@ class Movie < ApplicationRecord
 
     # Get a movie by API id
     def get(param)
-      movie_json = Movie.search_by_id(param["id"])
+      movie_json = Movie.search_by_id(param)
       movie = set(movie_json)
-      movie.genre = genres(movie_json["genres"])
-      movie
+    end
+
+    # Recommendations for a movie by API id
+    def get_recommendation(param)
+      movies = []
+      unless param.empty?
+        api_movies = Movie.recommendation(param)["results"]
+        api_movies.first(5).each do |movie_json|
+          movie = set(movie_json)
+          movies << movie if movie
+        end
+      end
+      movies
     end
 
     private
 
     # Movie instance mapper with JSON object
     def set(movie_json)
-      if movie_json["title"] && movie_json["popularity"] >= 5
+      movie = nil
+      if movie_json["title"] && movie_json["popularity"] && movie_json["popularity"] >= 5
         movie = Movie.new
         movie.imdb_id = movie_json["id"]
         movie.title = movie_json["title"]
@@ -42,10 +54,13 @@ class Movie < ApplicationRecord
         movie.release_date = movie_json["release_date"]
         movie.duration = movie_json["runtime"].to_s + "mins"
         movie.overview = movie_json["overview"].to_s
-        movie.data = movie_json
-        return movie
+        movie.genre = genres(movie_json["genres"]) if movie_json["genres"]
       end
-      return nil
+    rescue StandardError => e
+      puts e
+      puts "EXCEPTION" + movie.inspect
+    ensure
+      return movie
     end
 
     # Genres helper to parse JSON format from API

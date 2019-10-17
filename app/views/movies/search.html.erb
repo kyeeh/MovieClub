@@ -7,7 +7,9 @@
   <%= submit_tag "Search", name: nil %>
 <% end %>
 
-<% unless @movies.empty? %>
+<% if @movies.empty? %>
+  <h2>No movies found</h2>
+<% else %>
   <h2>Search Results</h2>
 
   <table>
@@ -23,7 +25,7 @@
     <tbody>
       <% @movies.each do |movie| %>
         <tr>
-          <td><img class="movie_poster" src=<%= "#{movie.img_url}" %>></td>
+          <td><img class="movie_poster" src="<%= movie.img_url %>"></td>
           <td><%= movie.title %></td>
           <td><%= movie.release_date %></td>
           <td><%= link_to "Add to Watchlist", add_movie_path(movie.imdb_id) %></td>

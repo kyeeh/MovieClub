@@ -22,9 +22,9 @@ class MoviesController < ApplicationController
   end
 
   # GET /movies/1/recommendations
-  def recommendations
-    #@movie = Movie.get(movie_id_param)
-    @movies = Movie.recommendation(movie_id_param)  
+  def recommendation
+    @movie = Movie.get(tmdb_id_param["id"])
+    @movies = Movie.get_recommendation(tmdb_id_param["id"])
   end  
 
   # GET /movies/new
@@ -40,7 +40,7 @@ class MoviesController < ApplicationController
   # POST /movies
   # POST /movies.json
   def add
-    @movie = Movie.get(movie_id_param)
+    @movie = Movie.get(tmdb_id_param["id"])
 
     respond_to do |format|
       if @movie.save
@@ -103,10 +103,10 @@ class MoviesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
       params.require(:movie).permit(:img_url, :title, :release_date, :genre, :duration, :query)
-      params.permit(:id)
     end
 
-    def movie_id_param
+    # This Movie ID is given by TMDB API
+    def tmdb_id_param
       params.permit(:id)
     end 
 end

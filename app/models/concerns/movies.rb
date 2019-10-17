@@ -20,21 +20,21 @@ module Movies
       end        
       url = "https://api.themoviedb.org/3/movie/" + param + "?api_key=" + ENV["TMDB_API_KEY"]\
             + "&include_adult=false" + "&language=en-US"
+      puts url
       response = HTTP.get(url).to_s
       JSON.parse(response)
     rescue ArgumentError => e
       json_response = { error: e }
     end
 
-    # Gets movie duration from Open Movie Database API
-    def duration(imdb_id)
-      unless ENV["OMDB_API_KEY"]
-        raise ArgumentError, "FATAL ERROR, NO API KEY PROVIDED"
-      end      
-      url = "http://www.omdbapi.com/?apikey=#{ENV["TMDB_API_KEY"]}&i=#{imdb_id}"
+    def recommendation(tmdb_id)
+      unless tmdb_id
+        raise ArgumentError, "FATAL ERROR, NO MOVIE ID PROVIDED"
+      end
+      url = "https://api.themoviedb.org/3/movie/" + tmdb_id + "/recommendations?api_key=" + ENV["TMDB_API_KEY"]\
+            + "&include_adult=false" + "&language=en-US"
       response = HTTP.get(url).to_s
-      json_response = JSON.parse(response)
-      puts json_response
+      JSON.parse(response)
     rescue ArgumentError => e
       json_response = { error: e }      
     end
