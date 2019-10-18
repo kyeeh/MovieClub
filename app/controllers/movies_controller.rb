@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all.order(:release_date)
+    @movies = current_user.movies.order(:release_date)
   end
 
   # GET /movies/1

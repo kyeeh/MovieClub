@@ -46,7 +46,8 @@ class Movie < ApplicationRecord
       movie = nil
       if movie_json["title"] && movie_json["popularity"] && movie_json["popularity"] >= 5
         movie = Movie.new
-        movie.imdb_id = movie_json["id"]
+        movie.tmdb_id = movie_json["id"]
+        movie.imdb_id = movie_json["imdb_id"]
         movie.title = movie_json["title"]
         if movie_json["poster_path"]
           movie.img_url = "https://image.tmdb.org/t/p/original" + movie_json["poster_path"]

@@ -30,7 +30,7 @@
           <td><%= movie.title %></td>
           <td><%= movie.release_date %></td>
           <td><%= movie.overview %></td>
-          <td><%= link_to "Add to Watchlist", add_movie_path(movie.imdb_id) %></td>
+          <td><%= link_to "Add to Watchlist", add_movie_path(movie.tmdb_id) %></td>
         </tr>
       <% end %>
     </tbody>
